@@ -26,7 +26,7 @@ For running this project, the most important library is Python version of Anacon
 2. Run 'python run.py'
 3. Open another terminal and type 'env|grep WORK'
    this will give you the spaceid it will start with view*** and some characters after that
-4. Now open your browser window and type https://viewa7a4999b-3001.udacity-student-workspaces.com, replace the whole viewa7a4999b with your space id you got in the step 2
+4. Now open your browser window and type https://viewa7a4999b-3001.udacity-student-workspaces.com, replace the whole viewa7a4999b with your space id you got in the step 3
 5. Press enter and the app should now run for you
 
 Local Machine

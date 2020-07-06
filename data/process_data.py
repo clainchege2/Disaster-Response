@@ -1,9 +1,9 @@
+# imports
 import sys
 import pandas as pd
-
 from sqlalchemy import create_engine
 
-def load_data(messages_filepath, categories_filepath):
+def load_data(messages_file_path, categories_file_path):
     """
     - Takes inputs as two CSV files
     - Imports them as pandas dataframe.
@@ -15,12 +15,13 @@ def load_data(messages_filepath, categories_filepath):
     merged_df pandas_dataframe: Dataframe obtained from merging the two input\
     data
     """
-    
-    messages = pd.read_csv(messages_filepath)
-    categories = pd.read_csv(categories_filepath)
-    df = messages.merge(categories, on='id')
-    return df
 
+    messages = pd.read_csv(messages_file_path)
+    categories = pd.read_csv(categories_file_path)
+    
+    df = messages.merge(categories, on='id')
+    
+    return df
 
 def clean_data(df):
     """
@@ -65,8 +66,7 @@ def clean_data(df):
 
     return df
 
-
-def save_data(df, database_filename):
+def save_data(df, database_file_name):
     """
     Saves cleaned data to an SQL database
     Args:
@@ -77,8 +77,11 @@ def save_data(df, database_filename):
     None
     """
     
-    engine = create_engine('sqlite:///{}'.format(database_filename))
-    df.to_sql('messages', engine, index=False, if_exists='replace')  
+    engine = create_engine('sqlite:///{}'.format(database_file_name)) 
+    db_file_name = database_file_name.split("/")[-1] # extract file name from \
+                                                     # the file path
+    table_name = db_file_name.split(".")[0]
+    df.to_sql(table_name, engine, index=False, if_exists = 'replace')
 
 
 def main():
@@ -107,5 +110,6 @@ def main():
               'DisasterResponse.db')
 
 
+# run
 if __name__ == '__main__':
     main()
